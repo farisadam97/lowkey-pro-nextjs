@@ -19,7 +19,7 @@ export const postLoginAxios = async (bodyReq) => {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('total_score', response.data.total_score);
             localStorage.setItem('status', "Login Success");
-            return console.log(localStorage.getItem('email'))
+            // return console.log(localStorage.getItem('email'))
             window.location = "/home-page/";
           })
           .catch(function (error) {
