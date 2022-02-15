@@ -4,31 +4,33 @@ import Container from '@mui/material/Container';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {postLoginAxios} from '../../services/auth.service';
+import { postProfileAxios } from '../../services/profile.service';
 // import { Link } from 'react-router-dom';
 import { useForm, Controller } from "react-hook-form";
 import { Input } from "@material-ui/core";
 import { useEffect } from "react";
 
+var uname   = localStorage.getItem('name')
+var uemail  = localStorage.getItem('email')
+var ubio    = localStorage.getItem('bio')
+var ucity   = localStorage.getItem('city')
+var uid     = localStorage.getItem('id')
+
 export default function FormProfile(){
     const { handleSubmit, formState: { errors }, control } = useForm({
         defaultValues: {
-          username: '',
-          password: '',
-          fullname:'',
-          email: ''
+          name: uname,
+          email: uemail,
+          bio: ubio,
+          city: ucity,
         }
       });
 
-      useEffect(() => {
-        // Perform localStorage action
-        const item = localStorage.getItem('name')
-        console.log(item)
-      }, [])
+     
     const onSubmit = data => {
         console.log(data);
         const dataJSON = JSON.stringify(data);
-        postLoginAxios(dataJSON);
+        postProfileAxios(dataJSON);
     };
 
     const gridFormStyle = {
@@ -50,7 +52,7 @@ export default function FormProfile(){
           <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="label">Full Name</label>
             <Controller
-            name="fullname"
+            name="name"
             control={control}
             rules={{ required: true }}
             render={({ field }) => 
@@ -58,7 +60,7 @@ export default function FormProfile(){
             }
             />
             {
-              errors.fullname?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
+              errors.name?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
             }
             <br/>
             <label htmlFor="label">Email</label>
@@ -74,37 +76,37 @@ export default function FormProfile(){
               errors.email?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
             }
             <br/>
-            <label htmlFor="label">Username</label>
+            <label htmlFor="label">City</label>
             <Controller
-            name="username"
+            name="city"
             control={control}
             rules={{ required: true }}
             render={({ field }) => 
-              <Input {...field} type="text" style={textFieldStyle} placeholder="Username" />
+              <Input {...field} type="text" style={textFieldStyle} placeholder="city" />
             }
             />
             {
-              errors.username?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
+              errors.city?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
             }
             <br/>
-            <label htmlFor="label">Password</label>
+            <label htmlFor="label">Bio</label>
             <Controller
-            name="password"
+            name="bio"
             control={control}
             rules={{ required: true }}
             render={({ field }) => 
-              <Input {...field} type="password" style={textFieldStyle} placeholder="Password" />
+              <Input {...field} type="text" style={textFieldStyle} placeholder="bio" />
             }
             />
             {
-              errors.password?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
+              errors.bio?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
             }
-            <br/>
+           
             
             <Button type="submit" variant="contained" sx={{width:"100%" , my:2}}>Submit</Button>
             <p style={{textAlign: "right"}}>
               {/* <Link style={{ color: 'black' }} to="/register"> */}
-                Register Now!
+                {/* Register Now! */}
               {/* </Link> */}
             </p>
           </form>
