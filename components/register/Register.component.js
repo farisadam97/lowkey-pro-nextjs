@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {postLoginAxios} from '../../services/auth.service';
+import { postRegisterAxios } from "../../services/auth.service";
 // import { Link } from 'react-router-dom';
 import { useForm, Controller } from "react-hook-form";
 import { Input } from "@material-ui/core";
@@ -12,16 +12,16 @@ import { Input } from "@material-ui/core";
 export default function FormRegister(){
     const { handleSubmit, formState: { errors }, control } = useForm({
         defaultValues: {
+          name: '',
           username: '',
-          password: '',
-          fullname: '',
-          email: ''
+          email: '',
+          password: ''
         }
       });
     const onSubmit = data => {
         console.log(data);
         const dataJSON = JSON.stringify(data);
-        postLoginAxios(dataJSON);
+        postRegisterAxios(dataJSON);
     };
 
     const gridFormStyle = {
@@ -41,9 +41,9 @@ export default function FormRegister(){
       <CardContent style={gridFormStyle}>
         <Container maxWidth="sm">
           <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="label">Full Name</label>
+          <label htmlFor="label">Name</label>
             <Controller
-            name="fullname"
+            name="name"
             control={control}
             rules={{ required: true }}
             render={({ field }) => 
@@ -54,30 +54,30 @@ export default function FormRegister(){
               errors.fullname?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
             }
             <br/>
-            <label htmlFor="label">Email</label>
-            <Controller
-            name="email"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => 
-              <Input {...field} type="text" style={textFieldStyle} placeholder="Email" />
-            }
-            />
-            {
-              errors.email?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
-            }
-            <br/>
             <label htmlFor="label">Username</label>
             <Controller
             name="username"
             control={control}
             rules={{ required: true }}
             render={({ field }) => 
-              <Input {...field} type="text" style={textFieldStyle} placeholder="Username" />
+              <Input {...field} type="text" style={textFieldStyle} placeholder="username" />
             }
             />
             {
               errors.username?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
+            }
+            <br/>
+            <label htmlFor="label">Email</label>
+            <Controller
+            name="email"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => 
+              <Input {...field} type="text" style={textFieldStyle} placeholder="email" />
+            }
+            />
+            {
+              errors.email?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
             }
             <br/>
             <label htmlFor="label">Password</label>

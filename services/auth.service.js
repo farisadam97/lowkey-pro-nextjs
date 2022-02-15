@@ -13,13 +13,14 @@ export const postLoginAxios = async (bodyReq) => {
             console.log(response.data);
             localStorage.setItem('id', response.data.id);
             localStorage.setItem('bio', response.data.bio);
+            localStorage.setItem('username', response.data.username);
+            localStorage.setItem('password', response.data.password);
             localStorage.setItem('city', response.data.city);
             localStorage.setItem('email', response.data.email);
             localStorage.setItem('name', response.data.name);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('total_score', response.data.total_score);
             localStorage.setItem('status', "Login Success");
-            return console.log(localStorage.getItem('email'))
             window.location = "/home-page/";
           })
           .catch(function (error) {
