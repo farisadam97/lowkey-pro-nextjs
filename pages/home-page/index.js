@@ -38,7 +38,9 @@ export default function HomePage() {
 		setIsOpened4(wasOpened => !wasOpened);
 	}
 	if (typeof window !== 'undefined') {
+		localStorage === window.localStorage;
 		var currentuser_name = localStorage.getItem('name');
+
 	}
   return (
 	<>

@@ -19,10 +19,11 @@ export const postLoginAxios = async (bodyReq) => {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('total_score', response.data.total_score);
             localStorage.setItem('status', "Login Success");
+            return console.log(localStorage.getItem('email'))
             window.location = "/home-page/";
           })
           .catch(function (error) {
-            alert(error.response.data.message);
+            alert(error.message);
           });
     }catch(error){
         console.log(error)
@@ -42,7 +43,7 @@ export const postRegisterAxios = async (bodyReq) => {
       alert("Akun anda sudah terdaftar, silahkan login.")
       window.location = '/login'
     }).catch(function (error) {
-      alert(error.response.data.message);
+      alert(error.message);
     });
 
   } catch (error) {
