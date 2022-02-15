@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {postLoginAxios} from '../../services/auth.service';
+import { postRegisterAxios } from "../../services/auth.service";
 // import { Link } from 'react-router-dom';
 import { useForm, Controller } from "react-hook-form";
 import { Input } from "@material-ui/core";
@@ -14,14 +14,14 @@ export default function FormRegister(){
         defaultValues: {
           username: '',
           password: '',
-          fullname: '',
+          name: '',
           email: ''
         }
       });
     const onSubmit = data => {
         console.log(data);
         const dataJSON = JSON.stringify(data);
-        postLoginAxios(dataJSON);
+        postRegisterAxios(dataJSON);
     };
 
     const gridFormStyle = {
@@ -43,7 +43,7 @@ export default function FormRegister(){
           <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="label">Full Name</label>
             <Controller
-            name="fullname"
+            name="name"
             control={control}
             rules={{ required: true }}
             render={({ field }) => 
@@ -51,7 +51,7 @@ export default function FormRegister(){
             }
             />
             {
-              errors.fullname?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
+              errors.name?.type === 'required' && <Typography sx={{color:"red"}} component="div" gutterBottom>Required</Typography>
             }
             <br/>
             <label htmlFor="label">Email</label>
