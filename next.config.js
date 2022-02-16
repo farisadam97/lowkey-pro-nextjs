@@ -1,4 +1,8 @@
 module.exports = {
   // reactStrictMode: true,
-  target: 'serverless'
+  target: 'serverless',
+  images: {
+    loader: 'akamai',
+    path: '',
+  }
 }
